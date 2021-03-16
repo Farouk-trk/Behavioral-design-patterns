@@ -23,6 +23,11 @@ public class Finance implements Subject {
         observers.add(o);
 
     }
+    public void unregister(Observer o) {
+		
+		int observerIndex = observers.indexOf(o);
+		System.out.println("Observer " + (observerIndex+1) + " deleted");
+		observers.remove(observerIndex);
 
     @Override
     public void notifyObserver() {
