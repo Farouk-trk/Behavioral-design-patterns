@@ -1,0 +1,21 @@
+Mediator script
+In this video we are going to talk about the Observer Pattern. As described earlier, the Mediator Pattern is used to handle the communication between related objects (also called colleagues). This reducees the dependencies between communicating objects.
+In our example, we want to create a customer service chatrooms where customers can ask a Tec supports for help. The communication between a customer and a Tech support is done through a concrete mediator object so they don’t need to know anything about each other.
+
+Let's get into the code:
+First we will create a Mediator interface called "CommunicationChannel".It defines a common interface for all possible concrete mediators. Here we define three methods. "notify" takes a User and a string message as parameters.It will handle the communication between the collegues registered in the same communication channel."registerTechSupport" and “registerCustomer” methods assigns two type of users to the communication channel.
+
+Next up we create our concrete mediator class "Chatroom".
+It inherits from the "CommunicationChannel " interface therefore we implement all the methods from the "CommunicationChannel" interface. We identify two attributes “techSupport” and ”customer” of type "User". These are the two collegues that will communicate to each other through the mediator. Now we need to implement the methods inherited from the " CommunicationChannel " interface. The “notify” method will call the user “receive” method to transmit a message coming from the sender. The “registerCustomer” and “registerTechSupport” take a User object as a parameter and assign its value to the ”customer”  and “techSupport” attributes respectively.
+
+
+Now we create the College abstract class and we name it User. In this abstract class we define tow attributes. The first attribute holds a reference to the mediator object. The second is a string to store the name of the user. Next, we create the constructor. It takes a reference to the mediator as parameter in addition to a string variable name. We store the reference to the mediator object so we can make calls to its methods and we assign the string value to our name attribute. After that we define two abstract methods “send” and “receive” that take a string message as a parameter. Finally we create a getter method to get the name of a user.
+
+Next up we create our first concrete College class and we name it TechSupport. This class inherits from the “User” abstract class therefore we will need to implement its abstract method. We start by creating a constructor that lead to the constructor of the super class User and register the techSupport object to the convenient mediator. Then we implement the “send” method. Here we print a message informing that a user is sending a message and we call the mediator method “notify” to handle the transfer of the message to its destination. And the “receive” method. Here we print a statement that the user received a message.
+
+We do the same work for the second concrete collegue class which is called "Customer". Here in the constractor we register the user as a customer to the convenient communicationChannel.
+
+Now we are ready to create the main class to test the design pattern.
+Inside the main class we create a chatroom object. Then we create two user objects. One of type TechSupport and the second of type Customer and for each object we pass the name of the user and the chatroom object we created previously as arguments. Finally, each user calls its “send” method to send a message. We run the program and we can see that each user receive the message sent from the other user through our concrete mediator chatrrom.
+
+
