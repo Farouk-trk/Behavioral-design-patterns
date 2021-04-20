@@ -16,16 +16,24 @@ public class NewBmwIterator implements CarIterator{
 	
 	@Override
 	public boolean HasNext() {
-		return (cursor < cars.size() && cars.get(cursor) != null);
+		if (cursor < cars.size() && cars.get(cursor) != null) {
+			if (cars.get(cursor).getFirstRegistration()>=year) {
+				return true;
+			}
+			else {
+				cursor ++;
+				return HasNext();
+			}
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
 	public Car Next() {
-		if (cars.get(cursor).getFirstRegistration()>=year) {
-			return cars.get(cursor++);
-			}
-		cursor++;
-		return this.Next();
+		return cars.get(cursor++);
+			
 	}
 
 }
